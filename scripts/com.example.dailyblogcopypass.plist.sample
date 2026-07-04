@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  LaunchAgent template for the 9AM daily blog copy pass.
+
+  This is a SAMPLE committed to the repo for reference. The live copy must be
+  installed on your Mac at:  ~/Library/LaunchAgents/com.example.dailyblogcopypass.plist
+
+  Before installing, replace:
+    __REPO_DIR__   with the absolute repo path on that Mac
+    __HOME__       with the user's home dir
+
+  See docs/architecture.md for full install steps.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.example.dailyblogcopypass</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/zsh</string>
+        <string>-lc</string>
+        <string>__REPO_DIR__/scripts/daily-blog-copy-pass.sh</string>
+    </array>
+
+    <!-- 9:00 AM every day. This intentionally runs after the 6AM publisher. -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>9</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>__HOME__/Library/Logs/daily-blog-copy-pass.out</string>
+    <key>StandardErrorPath</key>
+    <string>__HOME__/Library/Logs/daily-blog-copy-pass.err</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>__HOME__/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist>

@@ -1,0 +1,7 @@
+node_modules/
+.env.local
+.env
+.DS_Store
+*.log
+.daily-blog.lock
+.daily-blog-copy-pass.lock

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  LaunchAgent template for the 6AM auto-blog engine.
+
+  This is a SAMPLE committed to the repo for reference. The live copy must be
+  installed on your Mac at:  ~/Library/LaunchAgents/com.example.dailyblog.plist
+
+  Before installing, replace:
+    __REPO_DIR__   with the absolute repo path on that Mac
+                   (e.g. /Users/you/path/to/your-site)
+    __HOME__       with the user's home dir (e.g. /Users/you)
+
+  See docs/architecture.md for full install steps (incl. pmset wake).
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.example.dailyblog</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/zsh</string>
+        <string>-lc</string>
+        <string>__REPO_DIR__/scripts/daily-blog.sh</string>
+    </array>
+
+    <!-- 6:00 AM on each weekday (Weekday 1=Mon ... 5=Fri). launchd has no
+         "weekdays" shorthand, so list all five. To run 7 days/week, add dicts
+         for Weekday 6 (Sat) and 0 (Sun), and match the pmset wake day string. -->
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>6</integer><key>Minute</key><integer>0</integer></dict>
+        <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>6</integer><key>Minute</key><integer>0</integer></dict>
+        <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>6</integer><key>Minute</key><integer>0</integer></dict>
+        <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>6</integer><key>Minute</key><integer>0</integer></dict>
+        <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>6</integer><key>Minute</key><integer>0</integer></dict>
+    </array>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>__HOME__/Library/Logs/daily-blog.out</string>
+    <key>StandardErrorPath</key>
+    <string>__HOME__/Library/Logs/daily-blog.err</string>
+
+    <!-- Give the job a login-like PATH so node/npm/git/claude resolve. -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>__HOME__/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist>
