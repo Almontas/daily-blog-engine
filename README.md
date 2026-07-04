@@ -1,6 +1,6 @@
 # Daily Blog Engine
 
-An unattended pipeline that researches, writes, illustrates, quality-checks, and publishes a blog post every morning using headless Claude Code, launchd, and git.
+A Mac that writes and publishes your blog every morning, automatically. Built on Claude Code, launchd, and git.
 
 A Mac wakes itself at 5:55 AM. At 6:00 a LaunchAgent runs a thin shell wrapper that syncs your site repo and hands control to a headless Claude Code session driven by a prompt playbook. The playbook picks a topic, drafts the post, generates a featured image, runs a hard quality gate, and publishes by pushing to `main` (your host auto-deploys). At 9:00 a second LaunchAgent runs an independent copy-refinement pass with a second agent (Codex) that re-edits whatever shipped that morning.
 
